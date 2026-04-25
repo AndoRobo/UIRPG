@@ -2,8 +2,32 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    public string charName;
-    public float health;
+    [SerializeField] private string charName;
 
-    public abstract void Attack();
+    public string CharName
+    {
+        get { return charName; }
+    }
+    [SerializeField] private float health;
+
+    public float Health
+
+    {
+        get { return health; }
+        set { health = Mathf.Max(0, value); }
+    }
+    
+    public abstract void Attack(Character toHit);
+
+    public void GetHit(float damage)
+    {
+        health = health - damage;
+        Debug.Log(charName + " got hit by damage of: " +damage+ " Health after attack : " + health);
+    }
+
+    public void GetHit(Weapon weapon)
+    {
+        health = health - weapon.GetDamage();
+        Debug.Log(charName + " got hit by damage of: " +weapon.name+ " Health after attack : " + health);
+    }
 }

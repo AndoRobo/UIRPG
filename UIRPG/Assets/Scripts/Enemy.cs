@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-   public override void Attack()
+
+   [SerializeField] private float minDamage, maxDamage;
+   public Sprite enemyImage;
+
+   public override void Attack(Character toHit)
    {
-      Debug.Log("Attacking player");
+      float damage = Random.Range(minDamage, maxDamage);
+      toHit.GetHit(damage);
+      Debug.Log("Enemy attacking player");
    }
 }
