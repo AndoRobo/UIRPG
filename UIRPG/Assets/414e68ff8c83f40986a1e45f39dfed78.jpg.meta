@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4a972a3270058254b9a3b45865d44998
+guid: 7d3110ff3becd334c8099cbea03dac8e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4529719105046709876
-    second: ork2_0
+      213: 6168051093519624820
+    second: 414e68ff8c83f40986a1e45f39dfed78_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ork2_0
+      name: 414e68ff8c83f40986a1e45f39dfed78_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 250
-        height: 293
+        width: 736
+        height: 1104
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c89f36339743321c0800000000000000
-      internalID: -4529719105046709876
+      spriteID: 47a62b13ac1599550800000000000000
+      internalID: 6168051093519624820
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ork2_0: -4529719105046709876
+      414e68ff8c83f40986a1e45f39dfed78_0: 6168051093519624820
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

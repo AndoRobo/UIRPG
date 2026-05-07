@@ -1,14 +1,17 @@
+using System;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
     [SerializeField] private string charName;
+    [SerializeField] private float maxHealth = 20f;
 
+    private float health;
     public string CharName
     {
         get { return charName; }
     }
-    [SerializeField] private float health;
+    //[SerializeField] private float health;
 
     public float Health
 
@@ -21,13 +24,28 @@ public abstract class Character : MonoBehaviour
 
     public void GetHit(float damage)
     {
-        health = health - damage;
+        Health -= damage;
         Debug.Log(charName + " got hit by damage of: " +damage+ " Health after attack : " + health);
     }
 
     public void GetHit(Weapon weapon)
     {
-        health = health - weapon.GetDamage();
-        Debug.Log(charName + " got hit by damage of: " +weapon.name+ " Health after attack : " + health);
+        Health -= weapon.GetDamage();
+        Debug.Log(charName + " got hit by damage of: " +weapon.name+ " Health after attack : " + Health);
+    }
+    
+    public bool IsDead()
+    {
+        return health <= 0;
+    }
+
+    public void ResetHealth()
+    {
+        Health = maxHealth;
+    }
+
+    private void Start()
+    {
+        ResetHealth();
     }
 }

@@ -15,13 +15,15 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Image enemyPreview;
     [SerializeField] private Enemy[] allEnemies;
-    
-    
+    [SerializeField] private Button attackButton;
+    [SerializeField] private TMP_Text gameOverText;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
+        currentEnemy.ResetHealth();
         RefreshUI();
+        
       // Debug.Log("Selected name " + selectedChar.charName); 
       // selectedChar.Attack();
     }
@@ -34,8 +36,43 @@ public class GameManager : MonoBehaviour
 
     {
         player.Attack(currentEnemy);
+        
+        //enemy dead?
+        if (currentEnemy.IsDead())
+        {
+            //Destroy(currentEnemy.gameObject);
+            
+            SpawnNewEnemy();
+            RefreshUI();
+            return;
+        }
+
+        //enemy attacks player
         currentEnemy.Attack(player);
+        
+        // Player dead?
+
+        if (player.IsDead())
+        {
+            GameOver();
+            return;
+        }
+
         RefreshUI();
+    }
+
+    private void SpawnNewEnemy()
+    {
+        currentEnemy = allEnemies[Random.Range(0, allEnemies.Length)];
+        currentEnemy.ResetHealth();
+        Debug.Log("New enemy spawned: " + currentEnemy.CharName);
+    }
+
+    private void GameOver()
+    {
+        Debug.Log("Game Over");
+        attackButton.interactable = false;
+        gameOverText.gameObject.SetActive(true);
     }
 
     public void RefreshUI()

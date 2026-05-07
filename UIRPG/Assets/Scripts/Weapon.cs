@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour
 {
-   [SerializeField] internal float baseDamage;
-   
-   public virtual float GetDamage()
+   [SerializeField] protected float baseDamage;
+
+   public virtual void ShowWeapon()
    {
-      return baseDamage;
+      Debug.Log("Weapon equipped");
    }
+   public abstract float GetDamage();
 }
