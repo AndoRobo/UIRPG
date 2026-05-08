@@ -4,12 +4,23 @@ public class Enemy : Character
 {
 
    [SerializeField] private float minDamage, maxDamage;
-   public Sprite enemyImage;
+   [SerializeField] private Sprite enemyImage;
 
-   public override void Attack(Character toHit)
+   public Sprite EnemyImage
+   {
+      get { return enemyImage; }
+   }
+
+   public override string Attack(Character toHit)
    {
       float damage = Random.Range(minDamage, maxDamage);
+
       toHit.GetHit(damage);
-      Debug.Log("Enemy attacking player");
+
+      return CharName + " attacked "
+                      + toHit.CharName
+                      + " for "
+                      + damage.ToString("F1")
+                      + " damage!";
    }
 }

@@ -20,7 +20,7 @@ public abstract class Character : MonoBehaviour
         set { health = Mathf.Max(0, value); }
     }
     
-    public abstract void Attack(Character toHit);
+    public abstract string Attack(Character toHit);
 
     public void GetHit(float damage)
     {

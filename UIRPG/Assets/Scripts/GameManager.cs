@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Enemy[] allEnemies;
     [SerializeField] private Button attackButton;
     [SerializeField] private TMP_Text gameOverText;
-    
+
+    [SerializeField] private TMP_Text battleLogText;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
@@ -33,30 +34,45 @@ public class GameManager : MonoBehaviour
     }
 */
     public void Fight()
-
     {
-        player.Attack(currentEnemy);
-        
-        //enemy dead?
+        string battleMessage = "";
+
+        // Player attack
+        battleMessage += player.Attack(currentEnemy);
+
+        // Enemy dead?
         if (currentEnemy.IsDead())
         {
-            //Destroy(currentEnemy.gameObject);
-            
+            battleMessage += "\n\n"
+                             + currentEnemy.CharName
+                             + " was defeated!";
+
+            UpdateBattleLog(battleMessage);
+
             SpawnNewEnemy();
+
             RefreshUI();
+
             return;
         }
 
-        //enemy attacks player
-        currentEnemy.Attack(player);
-        
-        // Player dead?
+        // Enemy attack
+        battleMessage += "\n\n"
+                         + currentEnemy.Attack(player);
 
+        // Player dead?
         if (player.IsDead())
         {
+            battleMessage += "\n\nGAME OVER";
+
+            UpdateBattleLog(battleMessage);
+
             GameOver();
+
             return;
         }
+
+        UpdateBattleLog(battleMessage);
 
         RefreshUI();
     }
@@ -65,14 +81,21 @@ public class GameManager : MonoBehaviour
     {
         currentEnemy = allEnemies[Random.Range(0, allEnemies.Length)];
         currentEnemy.ResetHealth();
+        UpdateBattleLog("A new enemy appeared: " + currentEnemy.CharName);
         Debug.Log("New enemy spawned: " + currentEnemy.CharName);
     }
 
     private void GameOver()
     {
+        UpdateBattleLog("Game Over");
         Debug.Log("Game Over");
         attackButton.interactable = false;
         gameOverText.gameObject.SetActive(true);
+    }
+
+    private void UpdateBattleLog(string message)
+    {
+        battleLogText.text = message;
     }
 
     public void RefreshUI()
@@ -82,7 +105,7 @@ public class GameManager : MonoBehaviour
         
         enemyName.text = currentEnemy.CharName;
         enemyHP.text = "HP: " + currentEnemy.Health.ToString("F1");
-        //enemyPreview.sprite = currentEnemy.enemyImage;
+        enemyPreview.sprite = currentEnemy.EnemyImage;
     }
     
     
